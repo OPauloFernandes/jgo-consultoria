@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Consultoria financeira para pessoas, famílias e empresas com foco em planejamento, organização, investimentos e gestão financeira." />
+  <title>Joedson Oliveira | Consultoria Financeira</title>
+  <style>
+    :root {
+      --azul: #073763;
+      --azul-escuro: #052947;
+      --dourado: #d8ad3d;
+      --verde: #24d366;
+      --texto: #4b5563;
+      --fundo: #f7f9fc;
+      --branco: #ffffff;
+      --sombra: 0 18px 45px rgba(7, 55, 99, .10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--texto);
+      background: var(--branco);
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .top-bar {
+      height: 10px;
+      background: linear-gradient(90deg, #1f6b3a, #073763 55%, #1f6b3a);
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(10px);
+      border-bottom: 4px solid var(--azul);
+      box-shadow: 0 4px 20px rgba(7, 55, 99, .06);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+    }
+
+    .brand-logo {
+      width: 54px;
+      height: 54px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(7, 55, 99, .18);
+      background: var(--azul-escuro);
+    }
+
+    .brand-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: .04em;
+      color: var(--azul);
+      text-transform: uppercase;
+      font-size: .92rem;
+    }
+
+    .brand-name span:last-child { color: var(--dourado); }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--azul);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .menu a {
+      position: relative;
+      padding: 28px 0;
+    }
+
+    .menu a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 18px;
+      height: 2px;
+      background: var(--dourado);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .2s ease;
+    }
+
+    .menu a:hover::after { transform: scaleX(1); }
+
+    .whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background: var(--verde);
+      color: #fff;
+      font-weight: 800;
+      padding: 12px 22px;
+      font-size: .86rem;
+      box-shadow: 0 10px 20px rgba(36, 211, 102, .22);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top right, rgba(216, 173, 61, .18), transparent 34%),
+        linear-gradient(135deg, #052947 0%, #073763 58%, #0b3e68 100%);
+      color: #fff;
+      padding: 86px 0 94px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: #f1d37b;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: .82rem;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 5vw, 4.6rem);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+
+    .hero p {
+      margin: 0 0 30px;
+      font-size: 1.14rem;
+      color: rgba(255,255,255,.84);
+      max-width: 620px;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 28px 80px rgba(0,0,0,.24);
+      text-align: center;
+    }
+
+    .hero-card img {
+      width: min(310px, 100%);
+      border-radius: 28px;
+      display: block;
+      margin: 0 auto 24px;
+      box-shadow: 0 18px 48px rgba(0,0,0,.28);
+      background: var(--azul-escuro);
+    }
+
+    .hero-card strong {
+      color: #f1d37b;
+      font-size: 1.05rem;
+    }
+
+    .section { padding: 86px 0; }
+    .section-soft { background: var(--fundo); }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      color: var(--azul);
+      font-size: clamp(1.8rem, 3vw, 2.55rem);
+      line-height: 1.2;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 56px;
+      height: 4px;
+      margin: 18px auto 0;
+      background: var(--dourado);
+      border-radius: 999px;
+    }
+
+    .about-text {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.13rem;
+    }
+
+    .about-text p { margin: 0 0 24px; }
+    .about-text strong { color: #111827; font-weight: 800; }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .solution-card {
+      background: var(--branco);
+      border-radius: 14px;
+      padding: 28px 24px;
+      border-top: 5px solid var(--azul);
+      box-shadow: var(--sombra);
+      min-height: 100%;
+    }
+
+    .solution-card h3 {
+      margin: 0 0 16px;
+      color: var(--azul);
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }
+
+    .solution-card p {
+      margin: 0 0 18px;
+      font-size: .96rem;
+    }
+
+    .solution-card h4 {
+      margin: 20px 0 10px;
+      color: var(--azul-escuro);
+      font-size: .98rem;
+    }
+
+    .solution-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+      font-size: .92rem;
+    }
+
+    .solution-card li {
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .solution-card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--dourado);
+      font-weight: 900;
+    }
+
+    .contact {
+      text-align: center;
+      background: linear-gradient(135deg, #052947, #073763);
+      color: #fff;
+      border-radius: 26px;
+      padding: 52px 28px;
+      box-shadow: var(--sombra);
+    }
+
+    .contact h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+    }
+
+    .contact p {
+      margin: 0 auto 26px;
+      max-width: 680px;
+      color: rgba(255,255,255,.82);
+    }
+
+    footer {
+      padding: 28px 0;
+      background: #031d34;
+      color: rgba(255,255,255,.72);
+      text-align: center;
+      font-size: .92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .solutions-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav { align-items: flex-start; flex-direction: column; padding: 16px 0; }
+      .menu { flex-wrap: wrap; gap: 16px; }
+      .menu a { padding: 6px 0; }
+      .menu a::after { bottom: 0; }
+    }
+
+    @media (max-width: 640px) {
+      .solutions-grid { grid-template-columns: 1fr; }
+      .section { padding: 64px 0; }
+      .hero { padding: 62px 0; }
+      .brand { min-width: auto; }
+      .whatsapp { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar"></div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Joedson Oliveira Consultoria Financeira">
+        <img class="brand-logo" src="logo_joedson_oliveira_high_res.png" alt="Logo Joedson Oliveira Consultoria Financeira" />
+        <span class="brand-name"><span>Joedson</span><span>Oliveira</span></span>
+      </a>
+
+      <nav class="menu" aria-label="Menu principal">
+        <a href="#home">Home</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a class="whatsapp" href="https://wa.me/5521975319937" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Consultoria Financeira</div>
+          <h1>Organização financeira para pessoas, famílias e empresas.</h1>
+          <p>Planejamento, controle, investimentos e gestão financeira com estratégia personalizada para transformar decisões em resultados sustentáveis.</p>
+          <a class="whatsapp" href="https://wa.me/5521975319937" target="_blank" rel="noopener noreferrer">Fale pelo WhatsApp</a>
+        </div>
+
+        <div class="hero-card">
+          <img src="logo_joedson_oliveira_high_res.png" alt="Identidade visual Joedson Oliveira Consultoria Financeira" />
+          <strong>Joedson Oliveira</strong>
+          <p>Consultoria financeira com foco em clareza, controle e crescimento sustentável.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Sobre Joedson Oliveira</h2>
+        </div>
+
+        <div class="about-text">
+          <p><strong>Sou economista</strong> formado pela Universidade do Estado do Rio de Janeiro (UERJ) e <strong>atuo há mais de 12 anos na área financeira</strong>, com foco em planejamento e controle orçamentário.</p>
+          <p>Ao longo da minha carreira, me especializei em <strong>finanças pessoais</strong> e ajudo pessoas e famílias a alcançarem maior <strong>organização financeira, independência e melhor gestão do seu dinheiro</strong>.</p>
+          <p>Também ofereço <strong>consultoria para empresários</strong> que desejam melhorar a gestão financeira de seus negócios, com foco em controle, eficiência e crescimento sustentável.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="solucoes" class="section section-soft">
+      <div class="container">
+        <div class="section-title">
+          <h2>Soluções</h2>
+        </div>
+
+        <div class="solutions-grid">
+          <article class="solution-card">
+            <h3>Planejamento Financeiro Pessoal e Familiar</h3>
+            <p>Organização da sua vida financeira para que tenha mais clareza sobre como utilizar melhor seu dinheiro. O planejamento ajudará você e sua família a controlar gastos, definir prioridades e construir um futuro com mais segurança e tranquilidade.</p>
+            <p>Com uma estratégia personalizada, você irá aprender a estruturar seu orçamento, eliminar desperdícios, planejar objetivos importantes, como por exemplo, construção de reserva de emergência, aquisição de bens e aposentadoria.</p>
+            <h4>O que você vai conquistar:</h4>
+            <ul>
+              <li>Melhor controle das finanças pessoais e familiares</li>
+              <li>Planejamento para objetivos de curto, médio e longo prazo</li>
+              <li>Mais segurança e tranquilidade nas decisões financeiras</li>
+            </ul>
+          </article>
+
+          <article class="solution-card">
+            <h3>Consultoria para Endividados</h3>
+            <p>Saia do vermelho e recupere o controle da sua vida financeira. Com uma análise detalhada da sua situação, criaremos estratégias para renegociar dívidas, reduzir juros e organizar seu orçamento com o objetivo de evitar que problemas antigos voltem a surgir.</p>
+            <h4>O que você vai conquistar:</h4>
+            <ul>
+              <li>Estratégia personalizada para quitar dívidas e reduzir juros</li>
+              <li>Planejamento para evitar novos endividamentos</li>
+              <li>Desenvolvimento de hábitos financeiros mais saudáveis</li>
+              <li>Preparação para alcançar objetivos futuros sem comprometer a estabilidade</li>
+            </ul>
+          </article>
+
+          <article class="solution-card">
+            <h3>Orientação para Investimentos</h3>
+            <p>Aprenda a investir com segurança e inteligência, rentabilizando seu dinheiro de forma eficiente. Irei avaliar seu perfil, objetivos e prazos para recomendar estratégias de investimento alinhadas ao seu planejamento financeiro.</p>
+            <h4>O que você vai conquistar:</h4>
+            <ul>
+              <li>Decisões de investimento mais seguras e estratégicas</li>
+              <li>Diversificação de investimentos conforme seu perfil</li>
+              <li>Crescimento sustentável do seu patrimônio</li>
+            </ul>
+          </article>
+
+          <article class="solution-card">
+            <h3>Consultoria Empresarial</h3>
+            <p>Melhore a gestão financeira do seu negócio com estratégias que aumentem a eficiência, reduzem desperdícios e maximizem resultados. Suporte no planejamento orçamentário, fluxo de caixa e decisões estratégicas para um crescimento sólido e sustentável.</p>
+            <h4>O que você vai conquistar:</h4>
+            <ul>
+              <li>Controle financeiro eficiente do seu negócio</li>
+              <li>Redução de custos e otimização de recursos</li>
+              <li>Planejamento estratégico para decisões mais assertivas</li>
+              <li>Aumento da eficiência operacional e financeira</li>
+              <li>Crescimento sustentável do negócio com menor risco</li>
+              <li>Mais segurança para investimentos e expansão futura</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="section">
+      <div class="container">
+        <div class="contact">
+          <h2>Vamos organizar sua vida financeira?</h2>
+          <p>Entre em contato para entender qual solução faz mais sentido para o seu momento pessoal, familiar ou empresarial.</p>
+          <a class="whatsapp" href="https://wa.me/5521975319937" target="_blank" rel="noopener noreferrer">Chamar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© Joedson Oliveira Consultoria Financeira. Todos os direitos reservados.</div>
+  </footer>
+</body>
+</html>
