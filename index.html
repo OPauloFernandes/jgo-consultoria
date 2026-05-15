@@ -834,7 +834,7 @@
         padding: 12px 0;
         width: 100%;
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        color: #fff;
+        color: #fff !important;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -855,11 +855,19 @@
       }
 
       .menu a:hover {
-        color: var(--dourado);
+        color: var(--dourado) !important;
       }
 
       header {
         z-index: 25;
+      }
+
+      header.scrolled .menu a {
+        color: #fff !important;
+      }
+
+      header.scrolled .hamburger span {
+        background: #fff;
       }
     }
 
@@ -882,7 +890,7 @@
       }
 
       .section {
-        padding: 64px 0;
+        padding-top: 20px;
       }
 
       .hero {
