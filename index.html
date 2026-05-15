@@ -142,7 +142,6 @@
     }
 
     .top-bar {
-      height: 10px;
       background: linear-gradient(90deg, #1f6b3a, #073763 55%, #1f6b3a);
     }
 
@@ -473,6 +472,37 @@
       filter: drop-shadow(0 4px 12px rgba(216, 173, 61, 0.35));
     }
 
+    .card-flip-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 1;
+      transition: all 0.3s ease;
+      animation: pulse-hint 2s ease-in-out infinite;
+    }
+
+    .solution-card:hover .card-flip-hint {
+      border-color: var(--dourado);
+      color: var(--dourado);
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    @keyframes pulse-hint {
+      0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+    }
+
     .card-back {
       background: var(--branco);
       color: var(--texto);
@@ -482,7 +512,13 @@
       text-align: justify;
       padding: 32px 28px;
       justify-content: flex-start;
+      align-items: center;
       overflow-y: auto;
+    }
+
+    .card-back > div {
+      width: 100%;
+      max-width: 100%;
     }
 
     .solution-card h3 {
@@ -847,6 +883,7 @@
                   <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
                 <h3>Planejamento Financeiro Pessoal e Familiar</h3>
+                <span class="card-flip-hint">+</span>
               </div>
               <div class="card-face card-back">
                 <div>
@@ -870,6 +907,7 @@
                   <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                 </svg>
                 <h3>Consultoria para Endividados</h3>
+                <span class="card-flip-hint">+</span>
               </div>
               <div class="card-face card-back">
                 <div>
@@ -893,6 +931,7 @@
                   <polyline points="17 6 23 6 23 12"></polyline>
                 </svg>
                 <h3>Orientação para Investimentos</h3>
+                <span class="card-flip-hint">+</span>
               </div>
               <div class="card-face card-back">
                 <div>
@@ -915,6 +954,7 @@
                   <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                 </svg>
                 <h3>Consultoria Empresarial</h3>
+                <span class="card-flip-hint">+</span>
               </div>
               <div class="card-face card-back">
                 <div>
