@@ -1,109 +1,114 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><script data-offline-resolve="1">(function(){
-var ASSET_MAP = {"https://jgo-consultoria.vercel.app/": "assets/60ce53631db5b922_file.html", "https://jgo-consultoria.vercel.app/logo_joedson_oliveira_high_res.png": "assets/f1b0d786c65f664d_logo_joedson_oliveira_high_res.png", "https://wa.me/5521975319937": "assets/e4aba9e21b5a2bed_5521975319937.html"};
-// Pre-populate path+query keys: when opened via file://, JS
-// resolves '/foo.js' against file://… so we lose the original
-// origin. Indexing by pathname+search lets the lookup succeed.
-var _add = {};
-for (var _k in ASSET_MAP) {
-  try { var _u = new URL(_k); _add[_u.pathname + _u.search] = ASSET_MAP[_k]; }
-  catch(e){}
-}
-for (var _k in _add) if (!ASSET_MAP[_k]) ASSET_MAP[_k] = _add[_k];
-function resolveLocal(u){
-  if (!u || typeof u !== 'string') return null;
-  if (u.indexOf('data:') === 0 || u.indexOf('blob:') === 0) return null;
-  if (ASSET_MAP[u]) return ASSET_MAP[u];
-  try {
-    var url = new URL(u, location.href);
-    var pq = url.pathname + url.search;
-    if (ASSET_MAP[pq]) return ASSET_MAP[pq];
-    // Next.js image optimization wrapper — peel the inner CDN URL
-    if (/_next\/image$/.test(url.pathname)) {
-      var t = url.searchParams.get('url');
-      if (t) {
-        var dec = decodeURIComponent(t);
-        if (ASSET_MAP[dec]) return ASSET_MAP[dec];
-        var bare = dec.split('?')[0];
-        for (var k in ASSET_MAP) {
-          if (k.split('?')[0] === bare) return ASSET_MAP[k];
-        }
+<html lang="pt-BR">
+
+<head>
+  <script data-offline-resolve="1">(function () {
+      var ASSET_MAP = { "https://jgo-consultoria.vercel.app/": "assets/60ce53631db5b922_file.html", "https://jgo-consultoria.vercel.app/logo_joedson_oliveira_high_res.png": "assets/f1b0d786c65f664d_logo_joedson_oliveira_high_res.png", "https://wa.me/5521975319937": "assets/e4aba9e21b5a2bed_5521975319937.html" };
+      // Pre-populate path+query keys: when opened via file://, JS
+      // resolves '/foo.js' against file://… so we lose the original
+      // origin. Indexing by pathname+search lets the lookup succeed.
+      var _add = {};
+      for (var _k in ASSET_MAP) {
+        try { var _u = new URL(_k); _add[_u.pathname + _u.search] = ASSET_MAP[_k]; }
+        catch (e) { }
       }
-    }
-  } catch(e){}
-  return null;
-}
-function rewriteSrcset(s){
-  if (!s || typeof s !== 'string') return s;
-  return s.split(',').map(function(it){
-    var p = it.trim().split(/\s+/);
-    var loc = resolveLocal(p[0]);
-    if (loc) p[0] = loc;
-    return p.join(' ');
-  }).join(', ');
-}
-// Patch property setters: el.src = '...' / el.href = '...'
-// IMPORTANT: skip rewrite when the element has crossOrigin set.
-// WebGL textures (UnicornStudio, Three.js, etc.) are loaded via
-//   img.crossOrigin = 'anonymous'; img.src = 'https://cdn/...'
-// and consumed via gl.texImage2D. file:// resources have no CORS
-// headers, so rewriting to local makes WebGL reject the texture
-// (Access blocked by CORS policy → black/missing 3D scene).
-// Better to keep the original URL: works online, fails offline,
-// matches non-patched behaviour.
-function patchSetter(klass, prop, transform){
-  if (!klass || !klass.prototype) return;
-  var desc = Object.getOwnPropertyDescriptor(klass.prototype, prop);
-  if (!desc || !desc.set) return;
-  Object.defineProperty(klass.prototype, prop, {
-    configurable: true,
-    get: desc.get,
-    set: function(v){
-      try {
-        if (this.crossOrigin) {
-          /* preserve cross-origin URL — see comment above */
-        } else if (transform === 'srcset') {
-          v = rewriteSrcset(v);
-        } else {
-          var loc = resolveLocal(v); if (loc) v = loc;
-        }
-      } catch(e){}
-      desc.set.call(this, v);
-    }
-  });
-}
-patchSetter(window.HTMLScriptElement, 'src');
-patchSetter(window.HTMLLinkElement, 'href');
-patchSetter(window.HTMLImageElement, 'src');
-patchSetter(window.HTMLImageElement, 'srcset', 'srcset');
-patchSetter(window.HTMLSourceElement, 'src');
-patchSetter(window.HTMLSourceElement, 'srcset', 'srcset');
-patchSetter(window.HTMLMediaElement, 'src');
-patchSetter(window.HTMLIFrameElement, 'src');
-// Patch setAttribute too — some libs use it instead of property set
-var _setAttr = Element.prototype.setAttribute;
-Element.prototype.setAttribute = function(name, value){
-  try {
-    if (typeof value === 'string' && !this.crossOrigin) {
-      if (name === 'src' || name === 'href') {
-        var loc = resolveLocal(value);
-        if (loc) value = loc;
-      } else if (name === 'srcset') {
-        value = rewriteSrcset(value);
+      for (var _k in _add) if (!ASSET_MAP[_k]) ASSET_MAP[_k] = _add[_k];
+      function resolveLocal(u) {
+        if (!u || typeof u !== 'string') return null;
+        if (u.indexOf('data:') === 0 || u.indexOf('blob:') === 0) return null;
+        if (ASSET_MAP[u]) return ASSET_MAP[u];
+        try {
+          var url = new URL(u, location.href);
+          var pq = url.pathname + url.search;
+          if (ASSET_MAP[pq]) return ASSET_MAP[pq];
+          // Next.js image optimization wrapper — peel the inner CDN URL
+          if (/_next\/image$/.test(url.pathname)) {
+            var t = url.searchParams.get('url');
+            if (t) {
+              var dec = decodeURIComponent(t);
+              if (ASSET_MAP[dec]) return ASSET_MAP[dec];
+              var bare = dec.split('?')[0];
+              for (var k in ASSET_MAP) {
+                if (k.split('?')[0] === bare) return ASSET_MAP[k];
+              }
+            }
+          }
+        } catch (e) { }
+        return null;
       }
-    }
-  } catch(e){}
-  return _setAttr.call(this, name, value);
-};
-// Expose for the late-init script in body
-window.__resolveLocal = resolveLocal;
-window.__rewriteSrcset = rewriteSrcset;
-})();</script>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="Consultoria financeira para pessoas, famílias e empresas com foco em planejamento, organização, investimentos e gestão financeira." name="description"/>
-<title>Joedson Oliveira | Consultoria Financeira</title>
-<style>
+      function rewriteSrcset(s) {
+        if (!s || typeof s !== 'string') return s;
+        return s.split(',').map(function (it) {
+          var p = it.trim().split(/\s+/);
+          var loc = resolveLocal(p[0]);
+          if (loc) p[0] = loc;
+          return p.join(' ');
+        }).join(', ');
+      }
+      // Patch property setters: el.src = '...' / el.href = '...'
+      // IMPORTANT: skip rewrite when the element has crossOrigin set.
+      // WebGL textures (UnicornStudio, Three.js, etc.) are loaded via
+      //   img.crossOrigin = 'anonymous'; img.src = 'https://cdn/...'
+      // and consumed via gl.texImage2D. file:// resources have no CORS
+      // headers, so rewriting to local makes WebGL reject the texture
+      // (Access blocked by CORS policy → black/missing 3D scene).
+      // Better to keep the original URL: works online, fails offline,
+      // matches non-patched behaviour.
+      function patchSetter(klass, prop, transform) {
+        if (!klass || !klass.prototype) return;
+        var desc = Object.getOwnPropertyDescriptor(klass.prototype, prop);
+        if (!desc || !desc.set) return;
+        Object.defineProperty(klass.prototype, prop, {
+          configurable: true,
+          get: desc.get,
+          set: function (v) {
+            try {
+              if (this.crossOrigin) {
+                /* preserve cross-origin URL — see comment above */
+              } else if (transform === 'srcset') {
+                v = rewriteSrcset(v);
+              } else {
+                var loc = resolveLocal(v); if (loc) v = loc;
+              }
+            } catch (e) { }
+            desc.set.call(this, v);
+          }
+        });
+      }
+      patchSetter(window.HTMLScriptElement, 'src');
+      patchSetter(window.HTMLLinkElement, 'href');
+      patchSetter(window.HTMLImageElement, 'src');
+      patchSetter(window.HTMLImageElement, 'srcset', 'srcset');
+      patchSetter(window.HTMLSourceElement, 'src');
+      patchSetter(window.HTMLSourceElement, 'srcset', 'srcset');
+      patchSetter(window.HTMLMediaElement, 'src');
+      patchSetter(window.HTMLIFrameElement, 'src');
+      // Patch setAttribute too — some libs use it instead of property set
+      var _setAttr = Element.prototype.setAttribute;
+      Element.prototype.setAttribute = function (name, value) {
+        try {
+          if (typeof value === 'string' && !this.crossOrigin) {
+            if (name === 'src' || name === 'href') {
+              var loc = resolveLocal(value);
+              if (loc) value = loc;
+            } else if (name === 'srcset') {
+              value = rewriteSrcset(value);
+            }
+          }
+        } catch (e) { }
+        return _setAttr.call(this, name, value);
+      };
+      // Expose for the late-init script in body
+      window.__resolveLocal = resolveLocal;
+      window.__rewriteSrcset = rewriteSrcset;
+    })();</script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta
+    content="Consultoria financeira para pessoas, famílias e empresas com foco em planejamento, organização, investimentos e gestão financeira."
+    name="description" />
+  <title>Joedson Oliveira | Consultoria Financeira</title>
+  <style>
     :root {
       --azul: #073763;
       --azul-escuro: #052947;
@@ -115,8 +120,13 @@ window.__rewriteSrcset = rewriteSrcset;
       --sombra: 0 18px 45px rgba(7, 55, 99, .10);
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -126,7 +136,10 @@ window.__rewriteSrcset = rewriteSrcset;
       line-height: 1.65;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     .top-bar {
       height: 10px;
@@ -183,7 +196,9 @@ window.__rewriteSrcset = rewriteSrcset;
       font-size: .92rem;
     }
 
-    .brand-name span:last-child { color: var(--dourado); }
+    .brand-name span:last-child {
+      color: var(--dourado);
+    }
 
     .menu {
       display: flex;
@@ -214,7 +229,9 @@ window.__rewriteSrcset = rewriteSrcset;
       transition: transform .2s ease;
     }
 
-    .menu a:hover::after { transform: scaleX(1); }
+    .menu a:hover::after {
+      transform: scaleX(1);
+    }
 
     .whatsapp {
       display: inline-flex;
@@ -231,17 +248,18 @@ window.__rewriteSrcset = rewriteSrcset;
 
     .hero {
       background:
-        radial-gradient(circle at top right, rgba(216, 173, 61, .18), transparent 34%),
-        linear-gradient(135deg, #052947 0%, #073763 58%, #0b3e68 100%);
+        linear-gradient(135deg, rgba(5, 41, 71, 0.92) 0%, rgba(7, 55, 99, 0.92) 58%, rgba(11, 62, 104, 0.92) 100%),
+        url('assets/back.png') center/cover no-repeat;
       color: #fff;
       padding: 86px 0 94px;
       overflow: hidden;
+      position: relative;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 56px;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
       align-items: center;
     }
 
@@ -261,10 +279,17 @@ window.__rewriteSrcset = rewriteSrcset;
       letter-spacing: -.04em;
     }
 
+    .hero h2 {
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 5vw, 4.6rem);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+
     .hero p {
       margin: 0 0 30px;
       font-size: 1.14rem;
-      color: rgba(255,255,255,.84);
+      color: rgba(255, 255, 255, .84);
       max-width: 620px;
     }
 
@@ -273,8 +298,18 @@ window.__rewriteSrcset = rewriteSrcset;
       border: 1px solid rgba(255, 255, 255, .16);
       border-radius: 28px;
       padding: 34px;
-      box-shadow: 0 28px 80px rgba(0,0,0,.24);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .24);
       text-align: center;
+    }
+
+    .hero-grid > img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 20px;
+      display: block;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .hero-card img {
@@ -282,7 +317,7 @@ window.__rewriteSrcset = rewriteSrcset;
       border-radius: 28px;
       display: block;
       margin: 0 auto 24px;
-      box-shadow: 0 18px 48px rgba(0,0,0,.28);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, .28);
       background: var(--azul-escuro);
     }
 
@@ -291,8 +326,13 @@ window.__rewriteSrcset = rewriteSrcset;
       font-size: 1.05rem;
     }
 
-    .section { padding: 86px 0; }
-    .section-soft { background: var(--fundo); }
+    .section {
+      padding: 86px 0;
+    }
+
+    .section-soft {
+      background: var(--fundo);
+    }
 
     .section-title {
       text-align: center;
@@ -323,8 +363,14 @@ window.__rewriteSrcset = rewriteSrcset;
       font-size: 1.13rem;
     }
 
-    .about-text p { margin: 0 0 24px; }
-    .about-text strong { color: #111827; font-weight: 800; }
+    .about-text p {
+      margin: 0 0 24px;
+    }
+
+    .about-text strong {
+      color: #111827;
+      font-weight: 800;
+    }
 
     .solutions-grid {
       display: grid;
@@ -473,378 +519,458 @@ window.__rewriteSrcset = rewriteSrcset;
     .contact p {
       margin: 0 auto 26px;
       max-width: 680px;
-      color: rgba(255,255,255,.82);
+      color: rgba(255, 255, 255, .82);
     }
 
     footer {
       padding: 28px 0;
       background: #031d34;
-      color: rgba(255,255,255,.72);
+      color: rgba(255, 255, 255, .72);
       text-align: center;
       font-size: .92rem;
     }
 
     @media (max-width: 980px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .solutions-grid { grid-template-columns: repeat(2, 1fr); }
-      .solution-card { height: 480px; }
-      .nav { align-items: flex-start; flex-direction: column; padding: 16px 0; }
-      .menu { flex-wrap: wrap; gap: 16px; }
-      .menu a { padding: 6px 0; }
-      .menu a::after { bottom: 0; }
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .solutions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .solution-card {
+        height: 480px;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .menu {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .menu a {
+        padding: 6px 0;
+      }
+
+      .menu a::after {
+        bottom: 0;
+      }
     }
 
     @media (max-width: 640px) {
-      .solutions-grid { grid-template-columns: 1fr; }
-      .solution-card { height: 420px; }
-      .card-face { padding: 32px 24px; }
-      .solution-card h3 { font-size: 1.2rem; }
-      .section { padding: 64px 0; }
-      .hero { padding: 62px 0; }
-      .brand { min-width: auto; }
-      .whatsapp { width: 100%; }
-    }
-  </style>
-<style data-offline="1">/* offline: ensure content is visible regardless of JS init state */
-html,body{opacity:1!important;visibility:visible!important}
-.page-loader,.site-loader,[class*='loading-screen'],[id*='loading-screen']{display:none!important}
-</style></head>
-<body>
-<div class="top-bar"></div>
-<header>
-<div class="container nav">
-<a aria-label="Joedson Oliveira Consultoria Financeira" class="brand" href="#home">
-<img alt="Logo Joedson Oliveira Consultoria Financeira" class="brand-logo" src="assets/f1b0d786c65f664d_logo_joedson_oliveira_high_res.png"/>
-<span class="brand-name"><span>Joedson</span><span>Oliveira</span></span>
-</a>
-<nav aria-label="Menu principal" class="menu">
-<a href="#home">Home</a>
-<a href="#sobre">Sobre</a>
-<a href="#solucoes">Soluções</a>
-<a href="#contato">Contato</a>
-</nav>
-<a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">WhatsApp</a>
-</div>
-</header>
-<main id="home">
-<section class="hero">
-<div class="container hero-grid">
-<div>
-<div class="eyebrow">Consultoria Financeira</div>
-<h1>Organização financeira para pessoas, famílias e empresas.</h1>
-<p>Planejamento, controle, investimentos e gestão financeira com estratégia personalizada para transformar decisões em resultados sustentáveis.</p>
-<a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">Fale pelo WhatsApp</a>
-</div>
-<div class="hero-card">
-<img alt="Identidade visual Joedson Oliveira Consultoria Financeira" src="assets/joedson.png"/>
-<strong>Joedson Oliveira</strong>
-<p>Consultoria financeira com foco em clareza, controle e crescimento sustentável.</p>
-</div>
-</div>
-</section>
-<section class="section" id="sobre">
-<div class="container">
-<div class="section-title">
-<h2>Sobre Joedson Oliveira</h2>
-</div>
-<div class="about-text">
-<p><strong>Sou economista </strong>formado pela Universidade do Estado do Rio de Janeiro (UERJ) e <strong>atuo há mais de 12 anos na área financeira,</strong> com foco em planejamento e controle orçamentário.</p>
-<p>Ao longo da minha carreira, me especializei em <strong>finanças pessoais </strong>e ajudo pessoas e famílias a alcançarem maior <strong>organização financeira, independência e melhor gestão do seu dinheiro</strong>.</p>
-<p>Também ofereço <strong>consultoria para empresários</strong> que desejam melhorar a gestão financeira de seus negócios, com foco em controle, eficiência e crescimento sustentável.</p>
-</div>
-</div>
-</section>
-<section class="section section-soft" id="solucoes">
-<div class="container">
-<div class="section-title">
-<h2>Soluções</h2>
-</div>
-<div class="solutions-grid">
-<article class="solution-card">
-<div class="solution-card-inner">
-<div class="card-face card-front">
-<h3>Planejamento Financeiro Pessoal e Familiar</h3>
-</div>
-<div class="card-face card-back">
-<div>
-<p>Organização da sua vida financeira para que tenha mais clareza sobre como utilizar melhor seu dinheiro. O planejamento ajudará você e sua família a controlar gastos, definir prioridades e construir um futuro com mais segurança e tranquilidade.</p>
-<p>Com uma estratégia personalizada, você irá aprender a estruturar seu orçamento, eliminar desperdícios, planejar objetivos importantes, como por exemplo, construção de reserva de emergência, aquisição de bens e aposentadoria.</p>
-<h4>O que você vai conquistar:</h4>
-<ul>
-<li>Melhor controle das finanças pessoais e familiares</li>
-<li>Planejamento para objetivos de curto, médio e longo prazo</li>
-<li>Mais segurança e tranquilidade nas decisões financeiras</li>
-</ul>
-</div>
-</div>
-</div>
-</article>
-<article class="solution-card">
-<div class="solution-card-inner">
-<div class="card-face card-front">
-<h3>Consultoria para Endividados</h3>
-</div>
-<div class="card-face card-back">
-<div>
-<p>Saia do vermelho e recupere o controle da sua vida financeira. Com uma análise detalhada da sua situação, criaremos estratégias para renegociar dívidas, reduzir juros e organizar seu orçamento com o objetivo de evitar que problemas antigos voltem a surgir.</p>
-<h4>O que você vai conquistar:</h4>
-<ul>
-<li>Estratégia personalizada para quitar dívidas e reduzir juros</li>
-<li>Planejamento para evitar novos endividamentos</li>
-<li>Desenvolvimento de hábitos financeiros mais saudáveis</li>
-<li>Preparação para alcançar objetivos futuros sem comprometer a estabilidade</li>
-</ul>
-</div>
-</div>
-</div>
-</article>
-<article class="solution-card">
-<div class="solution-card-inner">
-<div class="card-face card-front">
-<h3>Orientação para Investimentos</h3>
-</div>
-<div class="card-face card-back">
-<div>
-<p>Aprenda a investir com segurança e inteligência, rentabilizando seu dinheiro de forma eficiente. Irei avaliar seu perfil, objetivos e prazos para recomendar estratégias de investimento alinhadas ao seu planejamento financeiro.</p>
-<h4>O que você vai conquistar:</h4>
-<ul>
-<li>Decisões de investimento mais seguras e estratégicas</li>
-<li>Diversificação de investimentos conforme seu perfil</li>
-<li>Crescimento sustentável do seu patrimônio</li>
-</ul>
-</div>
-</div>
-</div>
-</article>
-<article class="solution-card">
-<div class="solution-card-inner">
-<div class="card-face card-front">
-<h3>Consultoria Empresarial</h3>
-</div>
-<div class="card-face card-back">
-<div>
-<p>Melhore a gestão financeira do seu negócio com estratégias que aumentem a eficiência, reduzem desperdícios e maximizem resultados. Suporte no planejamento orçamentário, fluxo de caixa e decisões estratégicas para um crescimento sólido e sustentável.</p>
-<h4>O que você vai conquistar:</h4>
-<ul>
-<li>Controle financeiro eficiente do seu negócio</li>
-<li>Redução de custos e otimização de recursos</li>
-<li>Planejamento estratégico para decisões mais assertivas</li>
-<li>Aumento da eficiência operacional e financeira</li>
-<li>Crescimento sustentável do negócio com menor risco</li>
-<li>Mais segurança para investimentos e expansão futura</li>
-</ul>
-</div>
-</div>
-</div>
-</article>
-</div>
-</div>
-</section>
-<section class="section" id="contato">
-<div class="container">
-<div class="contact">
-<h2>Vamos organizar sua vida financeira?</h2>
-<p>Entre em contato para entender qual solução faz mais sentido para o seu momento pessoal, familiar ou empresarial.</p>
-<a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">Chamar no WhatsApp</a>
-</div>
-</div>
-</section>
-</main>
-<footer>
-<div class="container">© Joedson Oliveira Consultoria Financeira. Todos os direitos reservados.</div>
-</footer>
-<script data-offline-fix="1">(function(){
-var IS_CSR = false;
-var resolveLocal = window.__resolveLocal || function(){return null;};
-var rewriteSrcset = window.__rewriteSrcset || function(s){return s;};
-function fixImg(el){
-  if (!el || el.tagName !== 'IMG') return;
-  var src = el.getAttribute('src');
-  var loc = resolveLocal(src);
-  if (loc && src !== loc) el.setAttribute('src', loc);
-  var ss = el.getAttribute('srcset');
-  if (ss) {
-    var nss = rewriteSrcset(ss);
-    if (nss !== ss) el.setAttribute('srcset', nss);
-  }
-}
-function fixAll(){ document.querySelectorAll('img').forEach(fixImg); }
-function hasSlideOffset(t){
-  // True if a transform indicates a 'parked off-screen' starting
-  // state: translation in px (>= 30) or % (>= 5), or a matrix
-  // with non-zero translation. Returns false for crossfade-only
-  // companions like scale(0.9) or pure centering translateX(-50%).
-  if (!t || t === 'none') return false;
-  // matrix(a,b,c,d,tx,ty) — parse tx/ty; matrix3d & friends → assume slide.
-  var matMatch = t.match(/matrix\(([^)]+)\)/);
-  if (matMatch) {
-    var parts = matMatch[1].split(',').map(function(x){return parseFloat(x.trim());});
-    if (parts.length === 6) {
-      if (Math.abs(parts[4]) >= 30 || Math.abs(parts[5]) >= 30) return true;
-    } else { return true; }
-  }
-  if (/matrix3d/i.test(t)) return true;
-  var px = t.match(/(-?\d+\.?\d*)px/g) || [];
-  for (var i = 0; i < px.length; i++) {
-    if (Math.abs(parseFloat(px[i])) >= 30) return true;
-  }
-  var pct = t.match(/(-?\d+\.?\d*)%/g) || [];
-  for (var j = 0; j < pct.length; j++) {
-    if (Math.abs(parseFloat(pct[j])) >= 5) return true;
-  }
-  return false;
-}
-function isHiddenStart(s){
-  // True if the element's inline style is parked at a 'before'
-  // animation state. opacity:0 alone is ambiguous (could be a
-  // crossfade companion); pair it with a slide transform OR an
-  // explicit visibility:hidden (GSAP/SplitType signature) to be
-  // confident it's a scroll-reveal waiting to fire.
-  if (s.opacity !== '0' && s.visibility !== 'hidden') return false;
-  if (s.visibility === 'hidden') return true;
-  return hasSlideOffset(s.transform) || hasSlideOffset(s.translate);
-}
-function revealEl(el){
-  var s = el.style;
-  s.opacity = '1';
-  if (s.visibility === 'hidden') s.visibility = 'visible';
-  if (s.transform) s.transform = 'none';
-  if (s.translate) s.translate = 'none';
-  if (s.rotate)    s.rotate = 'none';
-  if (s.scale)     s.scale = 'none';
-  if (s.pointerEvents === 'none') s.pointerEvents = '';
-}
-function snapReveal(){
-  // Safety net: any 'before-state' element still hidden gets
-  // forced visible. Used as a deadline pass for non-CSR mode
-  // (after GSAP/etc had a chance to play) and as a final guard.
-  // Skip pinned-chain elements — same reason as findScrollAnchor.
-  var n = 0;
-  document.querySelectorAll('[style]').forEach(function(el){
-    if (!isHiddenStart(el.style)) return;
-    if (isInsideFixed(el)) return;
-    revealEl(el); n++;
-  });
-  if (window.console && n) console.log('[offline-fix] snap-revealed', n);
-}
-function isInsideFixed(el){
-  var p = el;
-  while (p && p !== document.documentElement) {
-    if (getComputedStyle(p).position === 'fixed') return true;
-    p = p.parentElement;
-  }
-  return false;
-}
-function findScrollAnchor(el){
-  // Pinned-narrative sections (one position:fixed ancestor wrapping
-  // many sequenced headings the live JS reveals one-by-one across
-  // scroll progress) can't be orchestrated offline — revealing all
-  // of them at once produces an overlapping mess. Skip them: leave
-  // the parked state intact, matching the live site at scroll=0.
-  // For sticky chains, observe the sticky container itself (fires
-  // when the user has scrolled past its stuck threshold).
-  if (isInsideFixed(el)) return null;
-  var p = el;
-  while (p && p !== document.documentElement) {
-    if (getComputedStyle(p).position === 'sticky') return p;
-    p = p.parentElement;
-  }
-  return el;
-}
-function progressiveReveal(){
-  // CSR mode: scripts stripped → no GSAP/IO is going to fire.
-  // Mimic a scroll-driven reveal: each parked element gets a
-  // CSS transition + IntersectionObserver. As it enters viewport
-  // we transition to the 'after' state, with a small stagger by
-  // document order so SplitType chars still feel letter-by-letter.
-  var targets = [];
-  document.querySelectorAll('[style]').forEach(function(el){
-    if (isHiddenStart(el.style)) targets.push(el);
-  });
-  if (!targets.length) return;
-  var EASE = 'cubic-bezier(.16,1,.3,1)';
-  targets.forEach(function(el){
-    el.style.transition =
-      'opacity .6s ' + EASE + ', transform .6s ' + EASE + ', ' +
-      'translate .6s ' + EASE + ', scale .6s ' + EASE + ', ' +
-      'visibility 0s linear';
-  });
-  if (typeof IntersectionObserver === 'undefined') {
-    targets.forEach(revealEl);
-    return;
-  }
-  // Group targets by their scroll anchor. Anchors in sticky
-  // sections share one observation point — when that anchor
-  // intersects, we reveal all its parked descendants.
-  // Targets with null anchor (inside position:fixed) are skipped.
-  var groups = new Map();
-  targets.forEach(function(el){
-    var anchor = findScrollAnchor(el);
-    if (!anchor) return;
-    if (!groups.has(anchor)) groups.set(anchor, []);
-    groups.get(anchor).push(el);
-  });
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (!entry.isIntersecting) return;
-      var children = groups.get(entry.target) || [entry.target];
-      children.sort(function(a, b){
-        var pos = a.compareDocumentPosition(b);
-        return (pos & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
-      });
-      children.forEach(function(child, i){
-        var delay = Math.min(i * 18, 700);
-        setTimeout(function(){ revealEl(child); }, delay);
-      });
-      io.unobserve(entry.target);
-    });
-  }, { threshold: 0.05, rootMargin: '0px 0px -8% 0px' });
-  groups.forEach(function(_, anchor){ io.observe(anchor); });
-  // Deadline guard: anything that never intersects still gets revealed.
-  setTimeout(snapReveal, 8000);
-}
-function initUnicornStudio(){
-  // Captured page already has the loaded UMD script + the inline
-  // loader that says `if(!window.UnicornStudio)…`. The loader bails
-  // because UnicornStudio is already defined, so init() never runs.
-  if (window.UnicornStudio && typeof window.UnicornStudio.init === 'function'
-      && !window.UnicornStudio.isInitialized) {
-    try { window.UnicornStudio.init(); window.UnicornStudio.isInitialized = true; }
-    catch(e){ if(window.console) console.warn('[offline-fix] UnicornStudio init failed:', e); }
-  }
-}
-// Initial img sweep + observer for hydration-time updates
-fixAll();
-var obs = new MutationObserver(function(muts){
-  for (var i = 0; i < muts.length; i++) {
-    var m = muts[i];
-    if (m.type === 'attributes' && m.target.tagName === 'IMG') fixImg(m.target);
-    for (var j = 0; j < m.addedNodes.length; j++) {
-      var n = m.addedNodes[j];
-      if (n && n.nodeType === 1) {
-        if (n.tagName === 'IMG') fixImg(n);
-        if (n.querySelectorAll) n.querySelectorAll('img').forEach(fixImg);
+      .solutions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .solution-card {
+        height: 420px;
+      }
+
+      .card-face {
+        padding: 32px 24px;
+      }
+
+      .solution-card h3 {
+        font-size: 1.2rem;
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .hero {
+        padding: 62px 0;
+      }
+
+      .brand {
+        min-width: auto;
+      }
+
+      .whatsapp {
+        width: 100%;
       }
     }
-  }
-});
-obs.observe(document, {childList:true, subtree:true,
-  attributes:true, attributeFilter:['src','srcset']});
-setTimeout(fixAll, 1000);
-setTimeout(fixAll, 3000);
-var go = function(){
-  // CSR: scripts stripped, so 'before-state' elements stay parked
-  // forever unless we do something. Use IntersectionObserver to
-  // reveal them progressively as the user scrolls — preserves the
-  // scroll-triggered animation feel for SplitType chars, etc.
-  // Non-CSR: GSAP/Framer may still play; let them, then catch any
-  // leftovers with a snap pass at 5 s.
-  if (IS_CSR) progressiveReveal();
-  else setTimeout(snapReveal, 5000);
-  initUnicornStudio();
-  setTimeout(initUnicornStudio, 500);
-  setTimeout(initUnicornStudio, 2000);
-};
-if (document.readyState === 'complete') go();
-else window.addEventListener('load', go);
-})();</script></body></html>
+  </style>
+  <style data-offline="1">
+    /* offline: ensure content is visible regardless of JS init state */
+    html,
+    body {
+      opacity: 1 !important;
+      visibility: visible !important
+    }
+
+    .page-loader,
+    .site-loader,
+    [class*='loading-screen'],
+    [id*='loading-screen'] {
+      display: none !important
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar"></div>
+  <header>
+    <div class="container nav">
+      <a aria-label="Joedson Oliveira Consultoria Financeira" class="brand" href="#home">
+        <img alt="Logo Joedson Oliveira Consultoria Financeira" class="brand-logo"
+          src="assets/f1b0d786c65f664d_logo_joedson_oliveira_high_res.png" />
+        <span class="brand-name"><span>Joedson</span><span>Oliveira</span></span>
+      </a>
+      <nav aria-label="Menu principal" class="menu">
+        <a href="#home">Home</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">WhatsApp</a>
+    </div>
+  </header>
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Consultoria Financeira</div>
+          <h2>Consultoria Financeira Profissional, Finanças Pessoais e Gestão de Recursos</h2>
+          <p>Estratégias personalizadas para organizar, planejar e
+            potencializar suas finanças e gerir recursos com
+            segurança e visão de longo prazo.</p>
+          <a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">Fale pelo
+            WhatsApp</a>
+        </div>
+          <img alt="Identidade visual Joedson Oliveira Consultoria Financeira" src="assets/joedson.png" />
+        </div>
+    </section>
+    <section class="section" id="sobre">
+      <div class="container">
+        <div class="section-title">
+          <h2>Sobre Joedson Oliveira</h2>
+        </div>
+        <div class="about-text">
+          <p><strong>Sou economista </strong>formado pela Universidade do Estado do Rio de Janeiro (UERJ) e <strong>atuo
+              há mais de 12 anos na área financeira,</strong> com foco em planejamento e controle orçamentário.</p>
+          <p>Ao longo da minha carreira, me especializei em <strong>finanças pessoais </strong>e ajudo pessoas e
+            famílias a alcançarem maior <strong>organização financeira, independência e melhor gestão do seu
+              dinheiro</strong>.</p>
+          <p>Também ofereço <strong>consultoria para empresários</strong> que desejam melhorar a gestão financeira de
+            seus negócios, com foco em controle, eficiência e crescimento sustentável.</p>
+        </div>
+      </div>
+    </section>
+    <section class="section section-soft" id="solucoes">
+      <div class="container">
+        <div class="section-title">
+          <h2>Soluções</h2>
+        </div>
+        <div class="solutions-grid">
+          <article class="solution-card">
+            <div class="solution-card-inner">
+              <div class="card-face card-front">
+                <h3>Planejamento Financeiro Pessoal e Familiar</h3>
+              </div>
+              <div class="card-face card-back">
+                <div>
+                  <p>Organização da sua vida financeira para que tenha mais clareza sobre como utilizar melhor seu
+                    dinheiro. O planejamento ajudará você e sua família a controlar gastos, definir prioridades e
+                    construir um futuro com mais segurança e tranquilidade.</p>
+                  <p>Com uma estratégia personalizada, você irá aprender a estruturar seu orçamento, eliminar
+                    desperdícios, planejar objetivos importantes, como por exemplo, construção de reserva de emergência,
+                    aquisição de bens e aposentadoria.</p>
+                  <h4>O que você vai conquistar:</h4>
+                  <ul>
+                    <li>Melhor controle das finanças pessoais e familiares</li>
+                    <li>Planejamento para objetivos de curto, médio e longo prazo</li>
+                    <li>Mais segurança e tranquilidade nas decisões financeiras</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="solution-card">
+            <div class="solution-card-inner">
+              <div class="card-face card-front">
+                <h3>Consultoria para Endividados</h3>
+              </div>
+              <div class="card-face card-back">
+                <div>
+                  <p>Saia do vermelho e recupere o controle da sua vida financeira. Com uma análise detalhada da sua
+                    situação, criaremos estratégias para renegociar dívidas, reduzir juros e organizar seu orçamento com
+                    o objetivo de evitar que problemas antigos voltem a surgir.</p>
+                  <h4>O que você vai conquistar:</h4>
+                  <ul>
+                    <li>Estratégia personalizada para quitar dívidas e reduzir juros</li>
+                    <li>Planejamento para evitar novos endividamentos</li>
+                    <li>Desenvolvimento de hábitos financeiros mais saudáveis</li>
+                    <li>Preparação para alcançar objetivos futuros sem comprometer a estabilidade</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="solution-card">
+            <div class="solution-card-inner">
+              <div class="card-face card-front">
+                <h3>Orientação para Investimentos</h3>
+              </div>
+              <div class="card-face card-back">
+                <div>
+                  <p>Aprenda a investir com segurança e inteligência, rentabilizando seu dinheiro de forma eficiente.
+                    Irei avaliar seu perfil, objetivos e prazos para recomendar estratégias de investimento alinhadas ao
+                    seu planejamento financeiro.</p>
+                  <h4>O que você vai conquistar:</h4>
+                  <ul>
+                    <li>Decisões de investimento mais seguras e estratégicas</li>
+                    <li>Diversificação de investimentos conforme seu perfil</li>
+                    <li>Crescimento sustentável do seu patrimônio</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="solution-card">
+            <div class="solution-card-inner">
+              <div class="card-face card-front">
+                <h3>Consultoria Empresarial</h3>
+              </div>
+              <div class="card-face card-back">
+                <div>
+                  <p>Melhore a gestão financeira do seu negócio com estratégias que aumentem a eficiência, reduzem
+                    desperdícios e maximizem resultados. Suporte no planejamento orçamentário, fluxo de caixa e decisões
+                    estratégicas para um crescimento sólido e sustentável.</p>
+                  <h4>O que você vai conquistar:</h4>
+                  <ul>
+                    <li>Controle financeiro eficiente do seu negócio</li>
+                    <li>Redução de custos e otimização de recursos</li>
+                    <li>Planejamento estratégico para decisões mais assertivas</li>
+                    <li>Aumento da eficiência operacional e financeira</li>
+                    <li>Crescimento sustentável do negócio com menor risco</li>
+                    <li>Mais segurança para investimentos e expansão futura</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="contact">
+          <h2>Vamos organizar sua vida financeira?</h2>
+          <p>Entre em contato para entender qual solução faz mais sentido para o seu momento pessoal, familiar ou
+            empresarial.</p>
+          <a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">Chamar no
+            WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">© Joedson Oliveira Consultoria Financeira. Todos os direitos reservados.</div>
+  </footer>
+  <script data-offline-fix="1">(function () {
+      var IS_CSR = false;
+      var resolveLocal = window.__resolveLocal || function () { return null; };
+      var rewriteSrcset = window.__rewriteSrcset || function (s) { return s; };
+      function fixImg(el) {
+        if (!el || el.tagName !== 'IMG') return;
+        var src = el.getAttribute('src');
+        var loc = resolveLocal(src);
+        if (loc && src !== loc) el.setAttribute('src', loc);
+        var ss = el.getAttribute('srcset');
+        if (ss) {
+          var nss = rewriteSrcset(ss);
+          if (nss !== ss) el.setAttribute('srcset', nss);
+        }
+      }
+      function fixAll() { document.querySelectorAll('img').forEach(fixImg); }
+      function hasSlideOffset(t) {
+        // True if a transform indicates a 'parked off-screen' starting
+        // state: translation in px (>= 30) or % (>= 5), or a matrix
+        // with non-zero translation. Returns false for crossfade-only
+        // companions like scale(0.9) or pure centering translateX(-50%).
+        if (!t || t === 'none') return false;
+        // matrix(a,b,c,d,tx,ty) — parse tx/ty; matrix3d & friends → assume slide.
+        var matMatch = t.match(/matrix\(([^)]+)\)/);
+        if (matMatch) {
+          var parts = matMatch[1].split(',').map(function (x) { return parseFloat(x.trim()); });
+          if (parts.length === 6) {
+            if (Math.abs(parts[4]) >= 30 || Math.abs(parts[5]) >= 30) return true;
+          } else { return true; }
+        }
+        if (/matrix3d/i.test(t)) return true;
+        var px = t.match(/(-?\d+\.?\d*)px/g) || [];
+        for (var i = 0; i < px.length; i++) {
+          if (Math.abs(parseFloat(px[i])) >= 30) return true;
+        }
+        var pct = t.match(/(-?\d+\.?\d*)%/g) || [];
+        for (var j = 0; j < pct.length; j++) {
+          if (Math.abs(parseFloat(pct[j])) >= 5) return true;
+        }
+        return false;
+      }
+      function isHiddenStart(s) {
+        // True if the element's inline style is parked at a 'before'
+        // animation state. opacity:0 alone is ambiguous (could be a
+        // crossfade companion); pair it with a slide transform OR an
+        // explicit visibility:hidden (GSAP/SplitType signature) to be
+        // confident it's a scroll-reveal waiting to fire.
+        if (s.opacity !== '0' && s.visibility !== 'hidden') return false;
+        if (s.visibility === 'hidden') return true;
+        return hasSlideOffset(s.transform) || hasSlideOffset(s.translate);
+      }
+      function revealEl(el) {
+        var s = el.style;
+        s.opacity = '1';
+        if (s.visibility === 'hidden') s.visibility = 'visible';
+        if (s.transform) s.transform = 'none';
+        if (s.translate) s.translate = 'none';
+        if (s.rotate) s.rotate = 'none';
+        if (s.scale) s.scale = 'none';
+        if (s.pointerEvents === 'none') s.pointerEvents = '';
+      }
+      function snapReveal() {
+        // Safety net: any 'before-state' element still hidden gets
+        // forced visible. Used as a deadline pass for non-CSR mode
+        // (after GSAP/etc had a chance to play) and as a final guard.
+        // Skip pinned-chain elements — same reason as findScrollAnchor.
+        var n = 0;
+        document.querySelectorAll('[style]').forEach(function (el) {
+          if (!isHiddenStart(el.style)) return;
+          if (isInsideFixed(el)) return;
+          revealEl(el); n++;
+        });
+        if (window.console && n) console.log('[offline-fix] snap-revealed', n);
+      }
+      function isInsideFixed(el) {
+        var p = el;
+        while (p && p !== document.documentElement) {
+          if (getComputedStyle(p).position === 'fixed') return true;
+          p = p.parentElement;
+        }
+        return false;
+      }
+      function findScrollAnchor(el) {
+        // Pinned-narrative sections (one position:fixed ancestor wrapping
+        // many sequenced headings the live JS reveals one-by-one across
+        // scroll progress) can't be orchestrated offline — revealing all
+        // of them at once produces an overlapping mess. Skip them: leave
+        // the parked state intact, matching the live site at scroll=0.
+        // For sticky chains, observe the sticky container itself (fires
+        // when the user has scrolled past its stuck threshold).
+        if (isInsideFixed(el)) return null;
+        var p = el;
+        while (p && p !== document.documentElement) {
+          if (getComputedStyle(p).position === 'sticky') return p;
+          p = p.parentElement;
+        }
+        return el;
+      }
+      function progressiveReveal() {
+        // CSR mode: scripts stripped → no GSAP/IO is going to fire.
+        // Mimic a scroll-driven reveal: each parked element gets a
+        // CSS transition + IntersectionObserver. As it enters viewport
+        // we transition to the 'after' state, with a small stagger by
+        // document order so SplitType chars still feel letter-by-letter.
+        var targets = [];
+        document.querySelectorAll('[style]').forEach(function (el) {
+          if (isHiddenStart(el.style)) targets.push(el);
+        });
+        if (!targets.length) return;
+        var EASE = 'cubic-bezier(.16,1,.3,1)';
+        targets.forEach(function (el) {
+          el.style.transition =
+            'opacity .6s ' + EASE + ', transform .6s ' + EASE + ', ' +
+            'translate .6s ' + EASE + ', scale .6s ' + EASE + ', ' +
+            'visibility 0s linear';
+        });
+        if (typeof IntersectionObserver === 'undefined') {
+          targets.forEach(revealEl);
+          return;
+        }
+        // Group targets by their scroll anchor. Anchors in sticky
+        // sections share one observation point — when that anchor
+        // intersects, we reveal all its parked descendants.
+        // Targets with null anchor (inside position:fixed) are skipped.
+        var groups = new Map();
+        targets.forEach(function (el) {
+          var anchor = findScrollAnchor(el);
+          if (!anchor) return;
+          if (!groups.has(anchor)) groups.set(anchor, []);
+          groups.get(anchor).push(el);
+        });
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var children = groups.get(entry.target) || [entry.target];
+            children.sort(function (a, b) {
+              var pos = a.compareDocumentPosition(b);
+              return (pos & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
+            });
+            children.forEach(function (child, i) {
+              var delay = Math.min(i * 18, 700);
+              setTimeout(function () { revealEl(child); }, delay);
+            });
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -8% 0px' });
+        groups.forEach(function (_, anchor) { io.observe(anchor); });
+        // Deadline guard: anything that never intersects still gets revealed.
+        setTimeout(snapReveal, 8000);
+      }
+      function initUnicornStudio() {
+        // Captured page already has the loaded UMD script + the inline
+        // loader that says `if(!window.UnicornStudio)…`. The loader bails
+        // because UnicornStudio is already defined, so init() never runs.
+        if (window.UnicornStudio && typeof window.UnicornStudio.init === 'function'
+          && !window.UnicornStudio.isInitialized) {
+          try { window.UnicornStudio.init(); window.UnicornStudio.isInitialized = true; }
+          catch (e) { if (window.console) console.warn('[offline-fix] UnicornStudio init failed:', e); }
+        }
+      }
+      // Initial img sweep + observer for hydration-time updates
+      fixAll();
+      var obs = new MutationObserver(function (muts) {
+        for (var i = 0; i < muts.length; i++) {
+          var m = muts[i];
+          if (m.type === 'attributes' && m.target.tagName === 'IMG') fixImg(m.target);
+          for (var j = 0; j < m.addedNodes.length; j++) {
+            var n = m.addedNodes[j];
+            if (n && n.nodeType === 1) {
+              if (n.tagName === 'IMG') fixImg(n);
+              if (n.querySelectorAll) n.querySelectorAll('img').forEach(fixImg);
+            }
+          }
+        }
+      });
+      obs.observe(document, {
+        childList: true, subtree: true,
+        attributes: true, attributeFilter: ['src', 'srcset']
+      });
+      setTimeout(fixAll, 1000);
+      setTimeout(fixAll, 3000);
+      var go = function () {
+        // CSR: scripts stripped, so 'before-state' elements stay parked
+        // forever unless we do something. Use IntersectionObserver to
+        // reveal them progressively as the user scrolls — preserves the
+        // scroll-triggered animation feel for SplitType chars, etc.
+        // Non-CSR: GSAP/Framer may still play; let them, then catch any
+        // leftovers with a snap pass at 5 s.
+        if (IS_CSR) progressiveReveal();
+        else setTimeout(snapReveal, 5000);
+        initUnicornStudio();
+        setTimeout(initUnicornStudio, 500);
+        setTimeout(initUnicornStudio, 2000);
+      };
+      if (document.readyState === 'complete') go();
+      else window.addEventListener('load', go);
+    })();</script>
+</body>
+
+</html>
