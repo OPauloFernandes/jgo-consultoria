@@ -414,15 +414,13 @@
     .solutions-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
+      gap: 28px;
       perspective: 1000px;
-      max-width: 1000px;
-      margin: 0 auto;
     }
 
     .solution-card {
       position: relative;
-      height: 580px;
+      height: 520px;
       cursor: pointer;
       border-radius: 14px;
       box-shadow: var(--sombra);
@@ -430,22 +428,6 @@
       border: none;
       padding: 0;
       transition: none;
-    }
-
-    .card-icon {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .card-icon svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 4px 12px rgba(216, 173, 61, 0.25));
-    }
     }
 
     .solution-card-inner {
@@ -483,6 +465,14 @@
       border-top: 5px solid var(--dourado);
     }
 
+    .card-front-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 24px;
+      color: var(--dourado);
+      filter: drop-shadow(0 4px 12px rgba(216, 173, 61, 0.35));
+    }
+
     .card-back {
       background: var(--branco);
       color: var(--texto);
@@ -499,10 +489,9 @@
       margin: 0;
       color: #fff;
       font-size: 1.35rem;
-      line-height: 1.3;
+      line-height: 1.4;
       font-weight: 700;
       letter-spacing: -.01em;
-      text-align: center;
     }
 
     .card-front h3 {
@@ -593,14 +582,6 @@
         grid-template-columns: 1fr;
       }
 
-      .solutions-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .solution-card {
-        height: 520px;
-      }
-
       .hamburger {
         display: flex;
       }
@@ -662,7 +643,8 @@
       }
 
       .solution-card {
-        height: 420px;
+        height: auto;
+        min-height: 420px;
       }
 
       .card-face {
@@ -772,22 +754,16 @@
           <article class="solution-card">
             <div class="solution-card-inner">
               <div class="card-face card-front">
-                <div class="card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#d8ad3d" stroke-width="1.5">
-                    <path d="M9 11a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/>
-                    <path d="M17.6 16.4a6 6 0 0 0-11.2 0M2 21h20"/>
-                  </svg>
-                </div>
-                <h3>Planejamento<br>Financeiro Pessoal<br>e Familiar</h3>
+                <svg class="card-front-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <h3>Planejamento Financeiro Pessoal e Familiar</h3>
               </div>
               <div class="card-face card-back">
                 <div>
-                  <p>Organização da sua vida financeira para que tenha mais clareza sobre como utilizar melhor
-seu dinheiro. O planejamento financeiro ajuda você e sua família a controlar gastos, definir
-prioridades e construir um futuro com mais segurança e tranquilidade.</p>
-                  <p>Com uma estratégia personalizada, você aprende a estruturar seu orçamento, eliminar
-desperdícios e planejar objetivos importantes, como reserva de emergência, educação,
-aquisição de bens e independência financeira.</p>
+                  <p>Organização da sua vida financeira para que tenha mais clareza sobre como utilizar melhor seu dinheiro. O planejamento financeiro ajuda você e sua família a controlar gastos, definir prioridades e construir um futuro com mais segurança e tranquilidade.</p>
+                  <p>Com uma estratégia personalizada, você aprende a estruturar seu orçamento, eliminar desperdícios e planejar objetivos importantes, como reserva de emergência, educação, aquisição de bens e independência financeira.</p>
                   <h4>O que você vai conquistar:</h4>
                   <ul>
                     <li>Melhor controle das finanças pessoais e familiares</li>
@@ -801,18 +777,15 @@ aquisição de bens e independência financeira.</p>
           <article class="solution-card">
             <div class="solution-card-inner">
               <div class="card-face card-front">
-                <div class="card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#d8ad3d" stroke-width="1.5">
-                    <path d="M12 2v20M2 12h20M6 6l12 12M18 6l-12 12"/>
-                  </svg>
-                </div>
-                <h3>Consultoria para<br>Endividados</h3>
+                <svg class="card-front-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+                <h3>Consultoria para Endividados</h3>
               </div>
               <div class="card-face card-back">
                 <div>
-                  <p>Saia do vermelho e recupere o controle da sua vida financeira. Com uma análise detalhada da
-sua situação, iremos criar estratégias para renegociar dívidas, reduzir juros e organizar seu
-orçamento com o objetivo de evitar que problemas antigos voltem a surgir.</p>
+                  <p>Saia do vermelho e recupere o controle da sua vida financeira. Com uma análise detalhada da sua situação, iremos criar estratégias para renegociar dívidas, reduzir juros e organizar seu orçamento com o objetivo de evitar que problemas antigos voltem a surgir.</p>
                   <h4>O que você vai conquistar:</h4>
                   <ul>
                     <li>Estratégia personalizada para quitar dívidas e reduzir juros</li>
@@ -827,19 +800,15 @@ orçamento com o objetivo de evitar que problemas antigos voltem a surgir.</p>
           <article class="solution-card">
             <div class="solution-card-inner">
               <div class="card-face card-front">
-                <div class="card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#d8ad3d" stroke-width="1.5">
-                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                    <polyline points="17 6 23 6 23 12"></polyline>
-                  </svg>
-                </div>
-                <h3>Orientação para<br>Investimentos</h3>
+                <svg class="card-front-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+                <h3>Orientação para Investimentos</h3>
               </div>
               <div class="card-face card-back">
                 <div>
-                  <p>Aprenda a investir com segurança e inteligência, rentabilizando seu dinheiro de forma
-eficiente. Irei avaliar seu perfil, objetivos e prazos para recomendar estratégias de
-investimento alinhadas ao seu planejamento financeiro.</p>
+                  <p>Aprenda a investir com segurança e inteligência, rentabilizando seu dinheiro de forma eficiente. Irei avaliar seu perfil, objetivos e prazos para recomendar estratégias de investimento alinhadas ao seu planejamento financeiro.</p>
                   <h4>O que você vai conquistar:</h4>
                   <ul>
                     <li>Decisões de investimento mais seguras e estratégicas</li>
@@ -853,19 +822,15 @@ investimento alinhadas ao seu planejamento financeiro.</p>
           <article class="solution-card">
             <div class="solution-card-inner">
               <div class="card-face card-front">
-                <div class="card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#d8ad3d" stroke-width="1.5">
-                    <rect x="2" y="7" width="20" height="13" rx="2"/>
-                    <path d="M16 3v4H8V3M6 14h12M6 18h12"/>
-                  </svg>
-                </div>
-                <h3>Consultoria<br>Empresarial</h3>
+                <svg class="card-front-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+                <h3>Consultoria Empresarial</h3>
               </div>
               <div class="card-face card-back">
                 <div>
-                  <p>Melhore a gestão financeira do seu negócio com estratégias que aumentam eficiência,
-reduzem desperdícios e maximizam resultados. Auxilio no planejamento orçamentário, fluxo
-de caixa e decisões estratégicas para um crescimento sólido e sustentável.</p>
+                  <p>Melhore a gestão financeira do seu negócio com estratégias que aumentam eficiência, reduzem desperdícios e maximizem resultados. Auxilio no planejamento orçamentário, fluxo de caixa e decisões estratégicas para um crescimento sólido e sustentável.</p>
                   <h4>O que você vai conquistar:</h4>
                   <ul>
                     <li>Controle financeiro eficiente do seu negócio</li>
