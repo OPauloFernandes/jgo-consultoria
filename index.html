@@ -699,6 +699,66 @@
         width: 100%;
       }
     }
+
+    /* ===== Scroll Reveal Animation ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-scale.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @media (min-width: 981px) {
+      .reveal,
+      .reveal-left,
+      .reveal-right,
+      .reveal-scale {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
   </style>
   <style data-offline="1">
     /* offline: ensure content is visible regardless of JS init state */
@@ -745,7 +805,7 @@
   <main id="home">
     <section class="hero">
       <div class="container hero-grid">
-        <div>
+        <div class="reveal-left">
           <div class="eyebrow">Consultoria Financeira</div>
           <h3>Consultoria Financeira Profissional, Finanças Pessoais e Gestão de Recursos</h3>
           <p>Estratégias personalizadas para organizar, planejar e
@@ -754,15 +814,15 @@
           <a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">Fale pelo
             WhatsApp</a>
         </div>
-          <img style="border-radius: 100%;" alt="Identidade visual Joedson Oliveira Consultoria Financeira" src="assets/joedson.png" />
+          <img class="reveal-right" style="border-radius: 100%;" alt="Identidade visual Joedson Oliveira Consultoria Financeira" src="assets/joedson.png" />
         </div>
     </section>
     <section class="section" id="sobre">
       <div class="container">
-        <div class="section-title">
+        <div class="section-title reveal">
           <h2>Sobre Joedson Oliveira</h2>
         </div>
-        <div class="about-text">
+        <div class="about-text reveal">
           <p><strong>Sou economista </strong>formado pela Universidade do Estado do Rio de Janeiro (UERJ) e <strong>atuo
               há mais de 12 anos na área financeira,</strong> com foco em planejamento e controle orçamentário.</p>
           <p>Ao longo da minha carreira, me especializei em <strong>finanças pessoais </strong>e ajudo pessoas e
@@ -775,11 +835,11 @@
     </section>
     <section class="section section-soft" id="solucoes">
       <div class="container">
-        <div class="section-title">
+        <div class="section-title reveal">
           <h2>Soluções</h2>
         </div>
         <div class="solutions-grid">
-          <article class="solution-card">
+          <article class="solution-card reveal-scale" style="transition-delay: 0s;">
             <div class="solution-card-inner">
               <div class="card-face card-front">
                 <svg class="card-front-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -802,7 +862,7 @@
               </div>
             </div>
           </article>
-          <article class="solution-card">
+          <article class="solution-card reveal-scale" style="transition-delay: 0.1s;">
             <div class="solution-card-inner">
               <div class="card-face card-front">
                 <svg class="card-front-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -825,7 +885,7 @@
               </div>
             </div>
           </article>
-          <article class="solution-card">
+          <article class="solution-card reveal-scale" style="transition-delay: 0.2s;">
             <div class="solution-card-inner">
               <div class="card-face card-front">
                 <svg class="card-front-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -847,7 +907,7 @@
               </div>
             </div>
           </article>
-          <article class="solution-card">
+          <article class="solution-card reveal-scale" style="transition-delay: 0.3s;">
             <div class="solution-card-inner">
               <div class="card-face card-front">
                 <svg class="card-front-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -877,7 +937,7 @@
     </section>
     <section class="section" id="contato">
       <div class="container">
-        <div class="contact">
+        <div class="contact reveal">
           <h2>Vamos organizar sua vida financeira?</h2>
           <p>Entre em contato para entender qual solução faz mais sentido para o seu momento pessoal, familiar ou
             empresarial.</p>
@@ -1113,6 +1173,45 @@
         hamburger.classList.remove('active');
         menu.classList.remove('active');
       }
+    });
+
+    // Scroll Reveal - animações ao scroll (apenas mobile/tablet)
+    function initScrollReveal() {
+      const isMobile = window.innerWidth <= 980;
+      const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+      if (!isMobile) {
+        // Desktop: mostra tudo sem animação
+        revealElements.forEach(function (el) {
+          el.classList.add('revealed');
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      revealElements.forEach(function (el) {
+        observer.observe(el);
+      });
+    }
+
+    initScrollReveal();
+
+    // Re-inicializar ao redimensionar
+    let resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(initScrollReveal, 250);
     });
   </script>
 </body>
