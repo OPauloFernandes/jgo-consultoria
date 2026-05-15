@@ -108,6 +108,7 @@
     content="Consultoria financeira para pessoas, famílias e empresas com foco em planejamento, organização, investimentos e gestão financeira."
     name="description" />
   <title>Joedson Oliveira | Consultoria Financeira</title>
+  <link rel="icon" type="image/png" href="assets/logo_para_fundo_claro.png" />
   <style>
     :root {
       --azul: #073763;
@@ -158,6 +159,12 @@
       backdrop-filter: blur(10px);
       border-bottom: 4px solid var(--azul);
       box-shadow: 0 4px 20px rgba(7, 55, 99, .06);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(255, 255, 255, .82);
+      box-shadow: 0 4px 24px rgba(7, 55, 99, .12);
     }
 
     .nav {
@@ -365,7 +372,7 @@
     }
 
     .section {
-      padding: 86px 0;
+      padding-top: 20px;
     }
 
     .section-soft {
@@ -644,6 +651,61 @@
       color: var(--dourado);
     }
 
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: .88rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      margin-bottom: 16px;
+    }
+
+    .email-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: var(--dourado);
+      color: var(--dourado);
+    }
+
+    .email-btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .whatsapp-float {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 30;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #25d366;
+      color: #fff;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+    }
+
+    .whatsapp-float svg {
+      width: 32px;
+      height: 32px;
+    }
+
     @media (max-width: 980px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -755,6 +817,10 @@
         max-width: 100%;
       }
 
+      .whatsapp-float {
+        display: flex;
+      }
+
       .brand {
         min-width: auto;
       }
@@ -847,8 +913,8 @@
     <div class="container nav">
       <a aria-label="Joedson Oliveira Consultoria Financeira" class="brand" href="#home">
         <img alt="Logo Joedson Oliveira Consultoria Financeira" class="brand-logo"
-          src="assets/f1b0d786c65f664d_logo_joedson_oliveira_high_res.png" />
-        <span class="brand-name"><span>Joedson</span><span>Oliveira</span></span>
+          src="assets/flogo_para_fundo_claro.png" />
+       
       </a>
       <nav aria-label="Menu principal" class="menu" id="menu">
         <a href="#home">Home</a>
@@ -1011,7 +1077,13 @@
           <a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">Chamar no WhatsApp</a>
           <div class="contact-footer">
             <div class="footer-links">
-              <a href="mailto:jgoconsultoria01@gmail.com">jgoconsultoria01@gmail.com</a>
+              <a href="mailto:jgoconsultoria01@gmail.com" class="email-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <polyline points="22 4 12 13 2 4"></polyline>
+                </svg>
+                jgoconsultoria01@gmail.com
+              </a>
             </div>
             © Joedson Oliveira Consultoria Financeira. Todos os direitos reservados.
           </div>
@@ -1019,6 +1091,13 @@
       </div>
     </section>
   </main>
+
+  <!-- Botão WhatsApp flutuante (mobile/tablet) -->
+  <a class="whatsapp-float" href="https://wa.me/5521975319937?text=Ol%C3%A1%2C%20vi%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20seus%20servi%C3%A7os%20de%20consultoria%20financeira." rel="noopener noreferrer" target="_blank" aria-label="Chamar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c0-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
   <script data-offline-fix="1">(function () {
       var IS_CSR = false;
       var resolveLocal = window.__resolveLocal || function () { return null; };
@@ -1281,6 +1360,16 @@
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(initScrollReveal, 250);
+    });
+
+    // Navbar transparente ao scroll
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 30) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
     });
   </script>
 </body>
