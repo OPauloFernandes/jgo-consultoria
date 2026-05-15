@@ -10,4 +10,4 @@ Allow: /
 User-agent: Twitterbot
 Allow: /
 
-Sitemap: https://jgo-consultoria-br.vercel.app/
+Sitemap: https://jgo-consultoria.vercel.app/
