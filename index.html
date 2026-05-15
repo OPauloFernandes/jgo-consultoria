@@ -202,19 +202,30 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-      min-width: auto;
+      gap: 12px;
+      min-width: 220px;
+    }
+
+    .brand-logo {
+      height: 56px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: none;
+      background: transparent;
+      transition: content 0s;
     }
 
     .brand-name {
       display: flex;
       flex-direction: column;
-      line-height: 1.1;
+      line-height: 1.05;
       font-weight: 800;
-      letter-spacing: .06em;
+      letter-spacing: .04em;
       color: #fff;
       text-transform: uppercase;
-      font-size: 1.15rem;
+      font-size: .92rem;
       transition: color 0.4s ease;
     }
 
@@ -977,7 +988,9 @@
   <header>
     <div class="container nav">
       <a aria-label="Joedson Oliveira Consultoria Financeira" class="brand" href="#home">
-        <span class="brand-name"><span>Joedson</span><span>Oliveira</span></span>
+        <img alt="Logo Joedson Oliveira Consultoria Financeira" class="brand-logo" id="brand-logo"
+          src="assets/logo1.png" />
+       
       </a>
       <nav aria-label="Menu principal" class="menu" id="menu">
         <a href="#home"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>Home</a>
@@ -1425,13 +1438,18 @@
       resizeTimer = setTimeout(initScrollReveal, 250);
     });
 
-    // Navbar transparente ao scroll
+    // Navbar transparente ao scroll + trocar logo
     const header = document.querySelector('header');
+    const brandLogo = document.getElementById('brand-logo');
+    const logoDark = 'assets/logo1.png';
+    const logoLight = 'assets/logo2.png';
     function updateHeader() {
       if (window.scrollY > 30) {
         header.classList.add('scrolled');
+        brandLogo.src = logoLight;
       } else {
         header.classList.remove('scrolled');
+        brandLogo.src = logoDark;
       }
     }
     window.addEventListener('scroll', updateHeader);
