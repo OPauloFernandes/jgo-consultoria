@@ -475,7 +475,7 @@
     .card-flip-hint {
       position: absolute;
       bottom: 20px;
-      left: 50%;
+      left: 10%;
       transform: translateX(-50%);
       width: 40px;
       height: 40px;
@@ -590,11 +590,11 @@
 
     .contact {
       text-align: center;
-      background: linear-gradient(135deg, #052947, #073763);
       color: #fff;
-      border-radius: 26px;
-      padding: 52px 28px;
-      box-shadow: var(--sombra);
+      padding: 80px 0 40px;
+      background:
+        linear-gradient(135deg, rgba(5, 41, 71, 0.93) 0%, rgba(7, 55, 99, 0.93) 58%, rgba(11, 62, 104, 0.93) 100%),
+        url('assets/back2.png') center/cover no-repeat;
     }
 
     .contact h2 {
@@ -608,12 +608,40 @@
       color: rgba(255, 255, 255, .82);
     }
 
-    footer {
-      padding: 28px 0;
-      background: #031d34;
+    .contact-footer {
+      margin-top: 60px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, .15);
       color: rgba(255, 255, 255, .72);
-      text-align: center;
       font-size: .92rem;
+    }
+
+    .contact-footer a {
+      color: var(--dourado);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-footer a:hover {
+      color: #f1d37b;
+    }
+
+    .contact-footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      font-size: .88rem;
+    }
+
+    .contact-footer .footer-links a {
+      color: rgba(255, 255, 255, .85);
+      transition: color 0.2s ease;
+    }
+
+    .contact-footer .footer-links a:hover {
+      color: var(--dourado);
     }
 
     @media (max-width: 980px) {
@@ -976,20 +1004,21 @@
       </div>
     </section>
     <section class="section" id="contato">
-      <div class="container">
-        <div class="contact reveal">
+      <div class="contact">
+        <div class="container">
           <h2>Vamos organizar sua vida financeira?</h2>
-          <p>Entre em contato para entender qual solução faz mais sentido para o seu momento pessoal, familiar ou
-            empresarial.</p>
-          <a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">Chamar no
-            WhatsApp</a>
+          <p>Entre em contato para entender qual solução faz mais sentido para o seu momento pessoal, familiar ou empresarial.</p>
+          <a class="whatsapp" href="https://wa.me/5521975319937" rel="noopener noreferrer" target="_blank">Chamar no WhatsApp</a>
+          <div class="contact-footer">
+            <div class="footer-links">
+              <a href="mailto:jgoconsultoria01@gmail.com">jgoconsultoria01@gmail.com</a>
+            </div>
+            © Joedson Oliveira Consultoria Financeira. Todos os direitos reservados.
+          </div>
         </div>
       </div>
     </section>
   </main>
-  <footer>
-    <div class="container">© Joedson Oliveira Consultoria Financeira. Todos os direitos reservados.</div>
-  </footer>
   <script data-offline-fix="1">(function () {
       var IS_CSR = false;
       var resolveLocal = window.__resolveLocal || function () { return null; };
